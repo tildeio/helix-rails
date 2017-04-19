@@ -5,6 +5,10 @@ module HelixRuntime
     class Railtie < ::Rails::Railtie
       config.helix = ActiveSupport::OrderedOptions.new
 
+      rake_tasks do
+        load File.expand_path("../../../tasks/helix.rake", __FILE__)
+      end
+
       initializer "helix.build_check" do |app|
         project = HelixRuntime::ParentProject.new(app.root)
 
